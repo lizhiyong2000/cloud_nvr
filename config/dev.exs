@@ -16,8 +16,10 @@ config :cloud_nvr_web, CloudNvrWeb.Endpoint,
       "node_modules/webpack/bin/webpack.js",
       "--mode",
       "development",
-      "--watch-stdin",
-      cd: Path.expand("../apps/cloud_nvr_web/assets", __DIR__)
+      "--config",
+      "webpack.config.js",
+      "--watch",
+      cd: Path.expand("../apps/cloud_nvr_front", __DIR__)
     ]
   ]
 

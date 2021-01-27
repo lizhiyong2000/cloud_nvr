@@ -66,7 +66,7 @@ defmodule CloudNvrWeb do
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View
 
-      import CloudNvrWeb.ErrorHelpers
+#      import CloudNvrWeb.ErrorHelpers
       import CloudNvrWeb.Gettext
       alias CloudNvrWeb.Router.Helpers, as: Routes
     end

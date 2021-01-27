@@ -10,7 +10,7 @@ defmodule CloudNvr.Application do
     children = [
       # Starts a worker by calling: CloudNvr2.Worker.start_link(arg)
       # {CloudNvr.Worker, arg}
-      CloudNvr.Repo
+      {CloudNvr.Repo, []}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

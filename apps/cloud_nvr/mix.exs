@@ -31,7 +31,10 @@ defmodule CloudNvr.MixProject do
       # {:sibling_app_in_umbrella, in_umbrella: true}
       {:ecto_sql, "3.5.3"},
       {:mariaex, "0.9.1"},
-      {:myxql, "0.4.5"}
+      {:myxql, "0.4.5"},
+      {:comeonin, "~> 4.1"},
+      {:pbkdf2_elixir, "~> 0.12"},
+    
     ]
   end
 end
