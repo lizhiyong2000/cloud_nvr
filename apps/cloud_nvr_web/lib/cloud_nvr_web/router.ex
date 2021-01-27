@@ -14,15 +14,15 @@ defmodule CloudNvrWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", CloudNvrWeb do
-    pipe_through :browser
-
-    get "/", PageController, :index
-#    resources "/users", UserController, only: [:show, :new, :create]
-#    get "/login", SessionController, :new
-#    post "/login", SessionController, :create
-#    delete "/logout", SessionController, :delete
-  end
+#  scope "/", CloudNvrWeb do
+#    pipe_through :browser
+#
+#    get "/", PageController, :index
+##    resources "/users", UserController, only: [:show, :new, :create]
+##    get "/login", SessionController, :new
+##    post "/login", SessionController, :create
+##    delete "/logout", SessionController, :delete
+#  end
 
   # Other scopes may use custom stacks.
   # scope "/api", CloudNvrWeb do

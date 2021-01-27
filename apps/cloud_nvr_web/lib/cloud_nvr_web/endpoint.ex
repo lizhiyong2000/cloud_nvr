@@ -20,11 +20,20 @@ defmodule CloudNvrWeb.Endpoint do
   #
   # You should set gzip to true if you are running phx.digest
   # when deploying your static files in production.
+  plug Plug.Static.IndexHtml, at: "/"
   plug Plug.Static,
     at: "/",
     from: :cloud_nvr_web,
     gzip: false,
-    only: ~w(assets css fonts images js favicon.ico manifest.json robots.txt)
+    only: ~w(index.html favicon.ico manifest.json robots.txt assets)
+    
+  
+#  plug(
+#    Plug.Static,
+#    at: "/",
+#    from: "priv/contact-react/build/",
+#    only: ~w(index.html favicon.ico static service-worker.js)
+#  )
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.

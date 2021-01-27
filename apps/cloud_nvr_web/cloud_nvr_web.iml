@@ -7,11 +7,11 @@
       <sourceFolder url="file://$MODULE_DIR$/lib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
-      <excludeFolder url="file://$MODULE_DIR$/assets/node_modules/phoenix" />
-      <excludeFolder url="file://$MODULE_DIR$/assets/node_modules/phoenix_html" />
       <excludeFolder url="file://$MODULE_DIR$/cover" />
       <excludeFolder url="file://$MODULE_DIR$/deps" />
       <excludeFolder url="file://$MODULE_DIR$/doc" />
+      <excludeFolder url="file://$MODULE_DIR$/frontend/node_modules/phoenix" />
+      <excludeFolder url="file://$MODULE_DIR$/frontend/node_modules/phoenix_html" />
       <excludeFolder url="file://$MODULE_DIR$/logs" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
@@ -50,5 +50,7 @@
     <orderEntry type="library" name="phoenix_ecto" level="project" />
     <orderEntry type="library" name="ecto" level="project" />
     <orderEntry type="library" name="decimal" level="project" />
+    <orderEntry type="library" name="plug_static_index_html" level="project" />
+    <orderEntry type="library" name="credo" level="project" />
   </component>
 </module>
