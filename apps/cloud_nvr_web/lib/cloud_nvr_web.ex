@@ -53,7 +53,7 @@ defmodule CloudNvrWeb do
 
   def channel do
     quote do
-      use Phoenix.Channel
+      use Phoenix.Device
       import CloudNvrWeb.Gettext
     end
   end
@@ -66,7 +66,7 @@ defmodule CloudNvrWeb do
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View
 
-#      import CloudNvrWeb.ErrorHelpers
+      import CloudNvrWeb.ErrorHelpers
       import CloudNvrWeb.Gettext
       alias CloudNvrWeb.Router.Helpers, as: Routes
     end

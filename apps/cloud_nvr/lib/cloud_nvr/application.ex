@@ -11,7 +11,6 @@ defmodule CloudNvr.Application do
       # Starts a worker by calling: CloudNvr.Worker.start_link(arg)
       # {CloudNvr.Worker, arg}
       {CloudNvr.Repo, []},
-      {Phoenix.PubSub, name: CloudNvr.PubSub}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

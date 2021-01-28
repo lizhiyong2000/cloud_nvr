@@ -25,9 +25,12 @@ defmodule CloudNvrWeb.Router do
 #  end
 
   # Other scopes may use custom stacks.
-  # scope "/api", CloudNvrWeb do
-  #   pipe_through :api
-  # end
+   scope "/api", CloudNvrWeb do
+     pipe_through :api
+     resources "/tenants", TenantController, except: [:new, :edit]
+     resources "/users", UserController, except: [:new, :edit]
+     resources "/devices", DeviceController, except: [:new, :edit]
+   end
 
   # Enables LiveDashboard only for development
   #

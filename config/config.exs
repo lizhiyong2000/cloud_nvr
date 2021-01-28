@@ -22,6 +22,10 @@ config :cloud_nvr, CloudNvr.Repo,
   port: "3306",
   url: "mysql://root@localhost:3306/cloud_nvr"
 
+config :cloud_nvr_web, :generators,
+       context_app: :cloud_nvr
+
+
 # Configures the endpoint
 config :cloud_nvr_web, CloudNvrWeb.Endpoint,
   url: [host: "localhost"],

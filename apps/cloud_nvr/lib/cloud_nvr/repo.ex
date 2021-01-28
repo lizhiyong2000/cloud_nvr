@@ -5,36 +5,36 @@ defmodule CloudNvr.Repo do
         otp_app: :cloud_nvr,
         adapter: Ecto.Adapters.MyXQL
         
-#    alias CloudNvr.Channel
+#    alias CloudNvr.Device
 #
 #    @items [
-#        %Channel{
+#        %Device{
 #            id: 1,
-#            title: "My first item",
+#            name: "My first item",
 #            description: "A tasty item sure to please",
 #            created_at: ~N[2020-01-01 00:00:00]
 #        },
-#        %Channel{
+#        %Device{
 #            id: 2,
-#            title: "WarGames Bluray",
+#            name: "WarGames Bluray",
 #            description: "The best computer movie of all time, now on Bluray!",
 #            created_at: ~N[2018-10-15 13:39:35]
 #        },
-#        %Channel{
+#        %Device{
 #            id: 3,
-#            title: "U2 - Achtung Baby on CD",
+#            name: "U2 - Achtung Baby on CD",
 #            description: "The sound of 4 men chopping down The Joshua Tree",
 #            created_at: ~N[2018-11-05 03:12:29]
 #        }
 #    ]
 
-#    def all(Channel), do: @items
+#    def all(Device), do: @items
 #
-#    def get!(Channel, id) do
+#    def get!(Device, id) do
 #        Enum.find(@items, fn(item) -> item.id === id end)
 #    end
 #
-#    def get_by(Channel, attrs) do
+#    def get_by(Device, attrs) do
 #        Enum.find(@items, fn(item) ->
 #            Enum.all?(Map.keys(attrs), fn(key) ->
 #                Map.get(item, key) === attrs[key]

@@ -10,7 +10,8 @@ defmodule CloudNvrWeb.Application do
       # Start the Telemetry supervisor
       CloudNvrWeb.Telemetry,
       # Start the Endpoint (http/https)
-      CloudNvrWeb.Endpoint
+      CloudNvrWeb.Endpoint,
+      {Phoenix.PubSub, name: CloudNvrWeb.PubSub}
       # Start a worker by calling: CloudNvrWeb.Worker.start_link(arg)
       # {CloudNvrWeb.Worker, arg}
     ]

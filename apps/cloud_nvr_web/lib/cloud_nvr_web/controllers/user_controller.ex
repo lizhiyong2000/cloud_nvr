@@ -1,40 +1,43 @@
 defmodule CloudNvrWeb.UserController do
-    use CloudNvrWeb, :controller
+  use CloudNvrWeb, :controller
 
-    plug :prevent_unauthorized_access when action in [:show]
+  alias CloudNvr.Accounts
+  alias CloudNvr.Accounts.User
 
-    def show(conn, %{"id" => id}) do
-        user = CloudNvr.get_user(id)
-        render conn, "show.html", user: user
+  action_fallback CloudNvrWeb.FallbackController
+
+  def index(conn, _params) do
+    users = Accounts.list_users()
+    render(conn, "index.json", users: users)
+  end
+
+  def create(conn, %{"user" => user_params}) do
+    with {:ok, %User{} = user} <- Accounts.create_user(user_params) do
+      conn
+      |> put_status(:created)
+      |> put_resp_header("location", Routes.user_path(conn, :show, user))
+      |> render("show.json", user: user)
     end
+  end
 
-    def new(conn, _params) do
-        user = CloudNvr.new_user()
-        render conn, "new.html", user: user
-    end
+  def show(conn, %{"id" => id}) do
+    user = Accounts.get_user!(id)
+    render(conn, "show.json", user: user)
+  end
 
-    def create(conn, %{"user" => user_params}) do
-        case CloudNvr.insert_user(user_params) do
-            {:ok, user} -> redirect conn, to: Routes.user_path(conn, :show, user)
-            {:error, user} -> render conn, "new.html", user: user
-        end
-    end
+  def update(conn, %{"id" => id, "user" => user_params}) do
+    user = Accounts.get_user!(id)
 
-    defp prevent_unauthorized_access(conn, _opts) do
-        current_user = Map.get(conn.assigns, :current_user)
-    
-        requested_user_id =
-            conn.params
-            |> Map.get("id")
-            |> String.to_integer()
-    
-        if current_user == nil || current_user.id != requested_user_id do
-            conn
-            |> put_flash(:error, "Nice try, friend. That's not a page for you.")
-            |> redirect(to: Routes.session_path(conn, :new))
-            |> halt()
-        else
-            conn
-        end
+    with {:ok, %User{} = user} <- Accounts.update_user(user, user_params) do
+      render(conn, "show.json", user: user)
     end
+  end
+
+  def delete(conn, %{"id" => id}) do
+    user = Accounts.get_user!(id)
+
+    with {:ok, %User{}} <- Accounts.delete_user(user) do
+      send_resp(conn, :no_content, "")
+    end
+  end
 end
