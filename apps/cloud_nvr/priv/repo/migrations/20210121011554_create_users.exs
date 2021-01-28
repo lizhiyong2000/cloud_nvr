@@ -5,7 +5,7 @@ defmodule CloudNvr.Repo.Migrations.CreateUsers do
     create table(:users) do
       add :username, :string
       add :email, :string
-      add :hashed_password, :string
+      add :password_hash, :string
       timestamps(inserted_at: :created_at)
     end
   

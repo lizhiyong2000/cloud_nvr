@@ -35,6 +35,8 @@ defmodule CloudNvr.MixProject do
       {:myxql, "0.4.5"},
       {:comeonin, "~> 4.1"},
       {:pbkdf2_elixir, "~> 0.12"},
+      {:scrivener_ecto, "~> 2.0"},
+      {:pow, "~> 1.0.22"},
     
     ]
   end

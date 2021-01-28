@@ -7,8 +7,10 @@ defmodule CloudNvrWeb.UserController do
   action_fallback CloudNvrWeb.FallbackController
 
   def index(conn, _params) do
-    users = Accounts.list_users()
-    render(conn, "index.json", users: users)
+    page = Accounts.list_users()
+    IO.inspect(page)
+    
+    render(conn, "index.json", users: page)
   end
 
   def create(conn, %{"user" => user_params}) do

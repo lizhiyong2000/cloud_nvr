@@ -52,5 +52,12 @@
     <orderEntry type="library" name="decimal" level="project" />
     <orderEntry type="library" name="plug_static_index_html" level="project" />
     <orderEntry type="library" name="credo" level="project" />
+    <orderEntry type="library" name="pow" level="project" />
+    <orderEntry type="library" name="ecto_sql" level="project" />
+    <orderEntry type="library" name="postgrex" level="project" />
+    <orderEntry type="library" name="db_connection" level="project" />
+    <orderEntry type="library" name="benchee" level="project" />
+    <orderEntry type="library" name="benchee_json" level="project" />
+    <orderEntry type="library" name="connection" level="project" />
   </component>
 </module>

@@ -3,12 +3,22 @@ defmodule CloudNvr.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
   import Pbkdf2
+  use Pow.Ecto.Schema
+
+  import Pow.Ecto.Schema.Changeset, only: [new_password_changeset: 3]
   
   schema "users" do
+#    pow_user_fields()
+    field :email,            :string, null: false
+    field :password_hash,    :string
+    field :current_password, :string, virtual: true
+    field :password,         :string, virtual: true
+    field :confirm_password, :string, virtual: true
+    
     field :username, :string
-    field :email, :string
-    field :password, :string, virtual: true
-    field :hashed_password, :string
+#    field :email, :string
+#    field :password, :string, virtual: true
+#    field :password_hash, :string
     timestamps(inserted_at: :created_at)
   end
   
@@ -16,11 +26,17 @@ defmodule CloudNvr.Accounts.User do
       hash_pwd_salt(password)
   
   def changeset(user, params \\ %{}) do
+#    user
+#    |> cast(params, [:username, :email])
+#    |> validate_required([:username, :email])
+#    |> validate_length(:username, min: 3)
+#    |> unique_constraint(:username)
+#    |> hash_password()
     user
-    |> cast(params, [:username, :email])
-    |> validate_required([:username, :email, :hashed_password])
-    |> validate_length(:username, min: 3)
-    |> unique_constraint(:username)
+    |> cast(params, [:username, :email, :password_hash])
+    |> pow_user_id_field_changeset(params)
+    |> pow_current_password_changeset(params)
+    |> new_password_changeset(params, @pow_config)
   end
   
   def changeset_with_password(user, params \\ %{}) do
@@ -36,7 +52,7 @@ defmodule CloudNvr.Accounts.User do
   defp hash_password(%Ecto.Changeset{changes: %{password: password}} =
       changeset) do
     changeset
-    |> put_change(:hashed_password, hash(password))
+    |> put_change(:password_hash, hash(password))
   end
   
   defp hash_password(changeset), do: changeset

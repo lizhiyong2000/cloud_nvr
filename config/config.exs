@@ -25,6 +25,10 @@ config :cloud_nvr, CloudNvr.Repo,
 config :cloud_nvr_web, :generators,
        context_app: :cloud_nvr
 
+# Configures pow
+config :cloud_nvr, :pow,
+       user: CloudNvr.Accounts.User,
+       repo: CloudNvr.Repo
 
 # Configures the endpoint
 config :cloud_nvr_web, CloudNvrWeb.Endpoint,
