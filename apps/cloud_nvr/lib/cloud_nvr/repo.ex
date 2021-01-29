@@ -5,7 +5,7 @@ defmodule CloudNvr.Repo do
         otp_app: :cloud_nvr,
         adapter: Ecto.Adapters.MyXQL
     use Scrivener, page_size: 10
-        
+    use Ecto.SoftDelete.Repo
 #    alias CloudNvr.Device
 #
 #    @items [

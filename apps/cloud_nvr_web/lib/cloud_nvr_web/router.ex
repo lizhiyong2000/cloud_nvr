@@ -14,11 +14,12 @@ defmodule CloudNvrWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
-    plug CloudNvrWeb.APIAuthPlug, otp_app: :cloud_nvr
+    plug CloudNvrWeb.Plugs.APIAuthPlug, otp_app: :cloud_nvr
   end
 
   pipeline :api_protected do
-    plug Pow.Plug.RequireAuthenticated, error_handler: CloudNvrWeb.APIAuthErrorHandler
+    plug Pow.Plug.RequireAuthenticated, error_handler: CloudNvrWeb.Plugs.APIAuthErrorHandler
+    plug CloudNvrWeb.Plugs.SetCurrentTenant
   end
   
 

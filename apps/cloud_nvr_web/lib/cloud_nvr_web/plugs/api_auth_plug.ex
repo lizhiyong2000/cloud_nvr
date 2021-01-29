@@ -1,5 +1,5 @@
 # lib/my_app_web/api_auth_plug.ex
-defmodule CloudNvrWeb.APIAuthPlug do
+defmodule CloudNvrWeb.Plugs.APIAuthPlug do
     @moduledoc false
     use Pow.Plug.Base
     

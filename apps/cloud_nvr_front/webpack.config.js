@@ -13,6 +13,12 @@ const HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
 // const smp = new SpeedMeasurePlugin();
 
 const path = require("path");
+const fs = require("fs");
+
+const lessToJs = require("less-vars-to-js");
+const themeVariables = lessToJs(
+  fs.readFileSync(path.join(__dirname, "./src/ant-theme-vars.less"), "utf8")
+);
 
 const devMode = process.env.NODE_ENV === "development";
 
@@ -39,11 +45,30 @@ const config = {
         test: /\.js$/,
         loader: "babel-loader",
         exclude: /node_modules/,
+        options: {
+          plugins: [["import", { libraryName: "antd", style: true }]],
+        },
       },
       {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
         exclude: /node_modules/,
+      },
+      {
+        test: /\.less$/,
+        use: [
+          { loader: "style-loader" },
+          { loader: "css-loader" },
+          {
+            loader: "less-loader",
+            options: {
+              lessOptions: {
+                modifyVars: themeVariables,
+                javascriptEnabled: true,
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.wav$|\.mp3$/,

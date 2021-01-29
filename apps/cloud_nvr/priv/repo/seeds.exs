@@ -13,21 +13,25 @@ default_user = "lizhiyong"
 default_email = "lizhiyong2000@gmail.com"
 default_password = "password123456"
 alias CloudNvr.Repo
-
+alias CloudNvr.Accounts
 {:ok, user} =
     CloudNvr.Accounts.create_user(%{
         username: default_user,
         email: default_email,
         password: default_password,
-        password_confirmation: default_password
+        password_confirmation: default_password,
+        tenant_name: default_user
     })
 
 {:ok, device} =
     %CloudNvr.Devices.Device{
         name: "test",
         description: "abcdef",
+        tenant_id: user.tenant.id
     }
     |> Repo.insert()
+ 
+{:ok, tenant} =  user.tenant |> Accounts.delete_tenant()
 
 #token = Noven.Devices.generate_token(device)
 #

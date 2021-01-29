@@ -51,7 +51,7 @@ defmodule CloudNvr.Accounts do
   """
   def create_user(attrs \\ %{}) do
     %User{}
-    |> User.changeset_with_password(attrs)
+    |> User.changeset(attrs)
     |> Repo.insert()
   end
 
@@ -182,7 +182,7 @@ defmodule CloudNvr.Accounts do
 
   """
   def delete_tenant(%Tenant{} = tenants) do
-    Repo.delete(tenants)
+    Repo.soft_delete(tenants)
   end
 
   @doc """

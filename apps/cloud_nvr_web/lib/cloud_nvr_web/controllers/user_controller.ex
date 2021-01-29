@@ -7,6 +7,7 @@ defmodule CloudNvrWeb.UserController do
   action_fallback CloudNvrWeb.FallbackController
 
   def index(conn, _params) do
+    current_tenant = conn.assigns.current_tenant
     page = Accounts.list_users()
     IO.inspect(page)
     

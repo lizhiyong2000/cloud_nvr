@@ -1,4 +1,4 @@
-defmodule CloudNvrWeb.APIAuthErrorHandler do
+defmodule CloudNvrWeb.Plugs.APIAuthErrorHandler do
     use CloudNvrWeb, :controller
     alias Plug.Conn
     
