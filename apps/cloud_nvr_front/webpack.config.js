@@ -81,7 +81,7 @@ const config = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(),
+    // new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
       filename: "../index.html",
@@ -116,6 +116,11 @@ const config = {
       },
     }),
   ].concat(devMode ? [new HardSourceWebpackPlugin()] : []),
+
+  watchOptions: {
+    poll: 500,
+    ignored: "node_modules/**",
+  },
 };
 
 // module.exports = smp.wrap(config)

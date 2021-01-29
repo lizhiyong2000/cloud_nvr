@@ -19,6 +19,7 @@ config :cloud_nvr_web, CloudNvrWeb.Endpoint,
       "--config",
       "webpack.config.js",
       "--watch",
+      "--progress",
       cd: Path.expand("../apps/cloud_nvr_front", __DIR__)
     ]
   ]

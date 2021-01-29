@@ -11,7 +11,7 @@ const Products = ({ dispatch, products }) => {
   }
   return (
     <div>
-      <h2>List of Products</h2>
+      <h2>List of Products 111</h2>
       <ProductList onDelete={handleDelete} products={products} />
     </div>
   );
