@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Table, Popconfirm, Button } from "antd";
+import Button from "antd/lib/button";
+import Table from "antd/lib/table";
+import Popconfirm from "antd/lib/popconfirm";
 
 const ProductList = ({ onDelete, products }) => {
   const columns = [

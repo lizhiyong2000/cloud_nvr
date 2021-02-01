@@ -18,10 +18,11 @@ erl_crash.dump
 
 # Also ignore archive artifacts (built via "mix archive.build").
 *.ez
-
+*.lock
 
 # Temporary files for e.g. tests
 /tmp
+/apps/cloud_nvr_front/.temp_cache/
 /apps/cloud_nvr_front/dist/
 /apps/cloud_nvr_front/node_modules/
 /apps/cloud_nvr_front/cloud_nvr_front.iml
