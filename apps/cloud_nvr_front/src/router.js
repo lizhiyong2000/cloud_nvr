@@ -4,6 +4,7 @@ import { connect } from "dva";
 
 import Devices from "./routes/Devices";
 import Users from "./routes/Users";
+import Login from "./routes/Login"
 
 class Hello extends Component {
   render() {
@@ -20,6 +21,7 @@ function RouterConfig({ history }) {
         <Route path="/" exact component={App} />
         <Route path="/devices" exact component={Devices} />
         <Route path="/users" exact component={Users} />
+        <Route path="/login" exact component={Login} />
       </Switch>
     </Router>
   );

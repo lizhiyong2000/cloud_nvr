@@ -1,7 +1,11 @@
 import dva from "dva";
 import RouterConfig from "./router";
 
+import LoginModel from "./models/login"
+
 import UsersModel from "./models/users"
+
+import DevicesModel from "./models/devices"
 
 // 1. Initialize
 const app = dva({
@@ -18,8 +22,9 @@ const app = dva({
 
 // 3. Model
 // app.model(require('./models/example').default);
-app.model(require("./models/devices").default);
+app.model(LoginModel);
 app.model(UsersModel)
+app.model(DevicesModel)
 // 4. Router  // require('./router').default
 app.router(RouterConfig);
 
