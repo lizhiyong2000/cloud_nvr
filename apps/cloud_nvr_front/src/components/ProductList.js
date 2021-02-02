@@ -4,6 +4,8 @@ import Button from "antd/lib/button";
 import Table from "antd/lib/table";
 import Popconfirm from "antd/lib/popconfirm";
 
+import "antd/dist/antd.less";
+
 const ProductList = ({ onDelete, products }) => {
   const columns = [
     {

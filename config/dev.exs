@@ -19,9 +19,14 @@ config :cloud_nvr_web, CloudNvrWeb.Endpoint,
       "--config",
       "webpack.config.js",
       "--watch",
+      "--watch-options-stdin",
       "--progress",
       cd: Path.expand("../apps/cloud_nvr_front", __DIR__)
     ]
+#    node: [
+#      "watch.js",
+#      cd: Path.expand("../apps/cloud_nvr_front", __DIR__)
+#    ]
   ]
 
 # ## SSL Support

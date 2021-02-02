@@ -22,7 +22,10 @@ const themeVariables = lessToJs(
   fs.readFileSync(path.join(__dirname, "./src/ant-theme-vars.less"), "utf8")
 );
 
-// console.log(process.env.NODE_ENV)
+var env = process.env.MIX_ENV || "dev";
+var prod = env === "prod";
+
+console.log(env);
 
 const devMode = process.env.NODE_ENV === "development";
 
@@ -32,7 +35,7 @@ function join(dest) {
 
 const config = {
   optimization: {
-    minimize: true,
+    // minimize: true,
     minimizer: [
       // new TerserPlugin(),
       new OptimizeCSSAssetsPlugin({}),
@@ -54,39 +57,30 @@ const config = {
   },
   module: {
     rules: [
-      // {
-      //   loader:'webpack-ant-icon-loader',
-      //   enforce: 'pre',
-      //   // options:{
-      //   //   chunkName:'antd-icons'
-      //   // },
-      //   include:[
-      //     require.resolve('@ant-design/icons/lib')
-      //   ]
-      // },
       {
         test: /\.js$/,
         loader: "babel-loader",
         exclude: /node_modules/,
         options: {
+          cacheDirectory: true,
           plugins: [
             [
               "import",
               {
                 libraryName: "antd",
-                libraryDirectory: "es",
-                style: "css",
+                // libraryDirectory: "es",
+                style: true,
               },
             ],
-            [
-              "import",
-              {
-                libraryName: "@ant-design/icons",
-                libraryDirectory: "es/icons",
-                camel2DashComponentName: false,
-              },
-              "@ant-design/icons",
-            ],
+            // [
+            //   "import",
+            //   {
+            //     libraryName: "@ant-design/icons",
+            //     libraryDirectory: "es/icons",
+            //     camel2DashComponentName: false,
+            //   },
+            //   "@ant-design/icons",
+            // ],
           ],
         },
       },
@@ -125,7 +119,7 @@ const config = {
     // new CleanWebpackPlugin(),
     // new BundleAnalyzerPlugin(),
     new HtmlWebpackPlugin({
-      favicon: "./public/favicon.ico",
+      // favicon: "./public/favicon.ico",
       template: "./public/index.html",
       filename: "../index.html",
       minify: {
@@ -134,12 +128,12 @@ const config = {
       },
       // hash: true //是否加上hash，默认是 false
     }),
-    // new CopyWebpackPlugin({
-    //   patterns: [
-    //     { from: "public/favicon.ico", to: "../" },
-    //     { from: "public/manifest.json", to: "../" },
-    //   ],
-    // }),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: "public/favicon.ico", to: "../" },
+        { from: "public/manifest.json", to: "../" },
+      ],
+    }),
     new MiniCssExtractPlugin({ filename: "app.css" }),
     new RobotstxtPlugin({ filePath: "../robots.txt" }),
     // new WebpackManifestPlugin({
