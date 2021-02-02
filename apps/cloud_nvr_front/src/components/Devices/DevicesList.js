@@ -6,7 +6,7 @@ import Popconfirm from "antd/lib/popconfirm";
 
 import "antd/dist/antd.less";
 
-const ProductList = ({ onDelete, products }) => {
+const DevicesList = ({ onDelete, devices }) => {
   const columns = [
     {
       title: "Name",
@@ -23,12 +23,12 @@ const ProductList = ({ onDelete, products }) => {
       },
     },
   ];
-  return <Table dataSource={products} columns={columns} />;
+  return <Table dataSource={devices} columns={columns} />;
 };
 
-ProductList.propTypes = {
+DevicesList.propTypes = {
   onDelete: PropTypes.func.isRequired,
-  products: PropTypes.array.isRequired,
+  devices: PropTypes.array.isRequired,
 };
 
-export default ProductList;
+export default DevicesList;

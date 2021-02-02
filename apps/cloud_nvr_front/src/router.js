@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Router, Route, Switch } from "dva/router";
 import { connect } from "dva";
 
-import Products from "./routes/Products";
+import Devices from "./routes/Devices";
+import Users from "./routes/Users";
 
 class Hello extends Component {
   render() {
@@ -17,7 +18,8 @@ function RouterConfig({ history }) {
     <Router history={history}>
       <Switch>
         <Route path="/" exact component={App} />
-        <Route path="/products" exact component={Products} />
+        <Route path="/devices" exact component={Devices} />
+        <Route path="/users" exact component={Users} />
       </Switch>
     </Router>
   );
