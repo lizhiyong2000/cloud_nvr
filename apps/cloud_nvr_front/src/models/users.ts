@@ -20,6 +20,9 @@ export default {
     },
     reducers: {
         save(state, { payload: { data } }) {
+
+            console.log(data)
+
             const list = data["data"]
             const total = data["total_pages"]
             const page = data["page_number"]

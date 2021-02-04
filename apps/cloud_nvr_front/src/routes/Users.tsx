@@ -8,7 +8,9 @@ import {IDevicesProps} from "./Devices";
 
 export interface IUsersProps {
     dispatch: Dispatch<any>;
-    state: StateType;
+    list: any[];
+    total: number;
+    page: number
 };
 
 const Users: React.FC<IUsersProps> = (props) => {
@@ -17,7 +19,7 @@ const Users: React.FC<IUsersProps> = (props) => {
     return (
         <div className={styles.normal}>
             <h2>List of Users1:</h2>
-            <UsersComponent list={props.state.list} total={props.state.total} page={props.state.page}/>
+            <UsersComponent list={props.list} total={props.total} page={props.page}/>
         </div>
     );
 };

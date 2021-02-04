@@ -35,7 +35,7 @@ export default {
 
 
             // yield call(delay,1000)
-            // yield put(routerRedux.push('/users'))
+            yield put(routerRedux.push('/users'))
         }},
     reducers: {
         showLoginLoading (state) {
