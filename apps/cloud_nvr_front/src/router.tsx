@@ -1,12 +1,14 @@
-import React, { Component } from "react";
+import * as React from "react";
 import { Router, Route, Switch } from "dva/router";
 import { connect } from "dva";
+
+import {History} from 'history';
 
 import Devices from "./routes/Devices";
 import Users from "./routes/Users";
 import Login from "./routes/Login"
 
-class Hello extends Component {
+class Hello extends React.Component {
   render() {
     return <h1>Hello Dva</h1>;
   }
@@ -14,7 +16,8 @@ class Hello extends Component {
 
 const App = connect()(Hello);
 
-function RouterConfig({ history }) {
+// function RouterConfig({ history }) {
+function RouterConfig({ history }: { history: History }) {
   return (
     <Router history={history}>
       <Switch>

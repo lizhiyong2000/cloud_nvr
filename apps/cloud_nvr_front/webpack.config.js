@@ -48,15 +48,22 @@ const config = {
     cacheDirectory: path.resolve(__dirname, ".temp_cache"),
   },
   entry: {
-    app: "./src/index.js",
+    app: "./src/index.tsx",
   },
   output: {
     path: join("../cloud_nvr_web/priv/static/assets"),
     filename: "[name].js",
     publicPath: "/assets/",
   },
+  resolve: {
+    extensions: [".js", ".jsx", ".json", ".ts", ".tsx", "css", "less"],
+  },
   module: {
     rules: [
+      {
+        test: /\.(ts|tsx)$/,
+        loader: "ts-loader",
+      },
       {
         test: /\.js$/,
         loader: "babel-loader",
@@ -88,6 +95,7 @@ const config = {
         test: /\.css$/,
         use: [
           MiniCssExtractPlugin.loader,
+          { loader: "style-loader" },
           {
             loader: 'css-loader',
             options: {

@@ -1,5 +1,5 @@
-import React from 'react';
-import { PropTypes } from 'prop-types';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import { connect } from 'dva'
 import Form from 'antd/lib/form';
 import Icon from 'antd/lib/icon';
@@ -8,21 +8,17 @@ import Button from 'antd/lib/button';
 
 const FormItem = Form.Item; //表单的每一个input都是一个Form.Item
 
-const Login = ({login: app }) => {
+export interface ILoginProps {
+    onLogin: (values:any)=>void;
+    loginLoading: boolean;
+};
 
-    const {loginLoading} = app
+
+const Login = ({onLogin, loginLoading }: ILoginProps) => {
+
+    // const {loginLoading} = app
 
     var uri = 'https://t.alipayobjects.com/images/T1QUBfXo4fXXXXXXXX.png'
-
-    function handleOk () {
-        // validateFieldsAndScroll((err,value)=>{
-        //     console.log(value)
-        //     if (err) {
-        //         return
-        //     }
-        //     dispatch({type:'app/login',payload:value})
-        // })
-    }
 
     return (
         <div style={styles.login}>
@@ -32,19 +28,19 @@ const Login = ({login: app }) => {
                     <span style={styles.loginText}>Dva Login Test</span>
                 </div>
                 <div style={styles.loginBody}>
-                    <form style={{width:'80%'}}>
+                    <Form style={{width:'80%'}} onFinish={onLogin}>
                         <FormItem hasFeedback name="username" rules={[{ required: true }]}>
-                           <Input size="large" onPressEnter={handleOk} placeholder="请输入用户名" />
+                           <Input size="large"  placeholder="请输入用户名" />
                         </FormItem>
                         <FormItem hasFeedback name="password" rules={[{ required: true }]}>
-                            <Input size="large" type="password" onPressEnter={handleOk} placeholder="请输入密码" />
+                            <Input size="large" type="password" placeholder="请输入密码" />
                         </FormItem>
 
-                        <Button style={styles.loginButton} type="primary" size="large" onClick={handleOk} loading={loginLoading}>
+                        <Button style={styles.loginButton} type="primary" htmlType="submit" size="large" loading={loginLoading}>
                             登录
                         </Button>
 
-                    </form>
+                    </Form>
                 </div>
 
             </div>

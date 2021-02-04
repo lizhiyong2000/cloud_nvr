@@ -1,25 +1,35 @@
 import * as usersService from '../services/users';
 
+import { Model } from 'dva';
+
+import {Location} from 'history'
+
+export type StateType = {
+    list: any[];
+    total: number;
+    page: number
+};
+
+
 export default {
     namespace: 'users',
     state: {
         list: [],
-        total: null,
-        page: null,
+        total: 0,
+        page: 0,
     },
     reducers: {
-        save(state, { payload: { data: list, total, page } }) {
+        save(state, { payload: { data } }) {
+            const list = data["data"]
+            const total = data["total_pages"]
+            const page = data["page_number"]
             return { ...state, list, total, page };
         },
     },
     effects: {
         *fetch({ payload: { page = 1} }, { call, put }) {
-            const { data, headers } = yield call(usersService.fetch, { page });
-            yield put({ type: 'save', payload: {
-                data,
-                    total: parseInt(headers['x-total-count'], 10),
-                    page: parseInt(page, 10),
-            } });
+            const data= yield call(usersService.fetch, { page });
+            yield put({ type: 'save', payload: data });
         },
     },
     subscriptions: {
@@ -29,13 +39,13 @@ export default {
         // },
         setupHistory({ dispatch, history }) {
             console.log("setup history.listen")
-            return history.listen(({ pathname, query }) => {
+            return history.listen(({ pathname, search }:Location) => {
                 console.log("pathname:" + pathname)
-                console.log(query)
+                console.log(search)
                 if (pathname === '/users') {
                     dispatch({ type: 'fetch', payload: {page: 1} });
                 }
             });
         },
     },
-};
+} as Model;

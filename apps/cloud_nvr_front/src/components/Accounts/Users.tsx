@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { connect } from 'dva';
 
 import Pagination from 'antd/lib/pagination';
@@ -6,13 +6,20 @@ import Table from "antd/lib/table";
 import Popconfirm from "antd/lib/popconfirm";
 import "antd/dist/antd.less";
 
-import styles from './Users.css';
+import * as styles from './Users.less';
 
 
 import { PAGE_SIZE } from '../../constants';
 
-function Users({ list: dataSource, total, page: current }) {
-    function deleteHandler(id) {
+export interface IUsersProps {
+    list: any[];
+    total: number;
+    page: number
+};
+
+
+function Users({ list: dataSource, total, page: current } : IUsersProps) {
+    function deleteHandler(id:any) {
         console.warn(`TODO: ${id}`);
     }
 
@@ -21,7 +28,7 @@ function Users({ list: dataSource, total, page: current }) {
             title: 'Name',
             dataIndex: 'name',
             key: 'name',
-            render: text => <a href="">{text}</a>,
+            render: (text:any) => <a href="">{text}</a>,
         },
         {
             title: 'Email',
@@ -36,10 +43,10 @@ function Users({ list: dataSource, total, page: current }) {
         {
             title: 'Operation',
             key: 'operation',
-            render: (text, { id }) => (
+            render: (text :any, record: any) => (
                 <span className={styles.operation}>
                     <a href="">Edit</a>
-                  <Popconfirm title="Confirm to delete?" onConfirm={deleteHandler.bind(null, id)}>
+                  <Popconfirm title="Confirm to delete?" onConfirm={deleteHandler.bind(null, record.id)}>
                     <a href="">Delete</a>
                   </Popconfirm>
                 </span>

@@ -1,14 +1,12 @@
 import dva from "dva";
-import RouterConfig from "./router";
-
-import LoginModel from "./models/login"
-
-import UsersModel from "./models/users"
-
-import DevicesModel from "./models/devices"
+import createhistory from 'history/createBrowserHistory';
 
 // 1. Initialize
 const app = dva({
+  onError: (e) => {
+    console.error(e.message);
+  },
+  history: createhistory(),
   initialState: {
     devices: [
       { name: "dva", id: 1 },
@@ -22,11 +20,11 @@ const app = dva({
 
 // 3. Model
 // app.model(require('./models/example').default);
-app.model(LoginModel);
-app.model(UsersModel)
-app.model(DevicesModel)
+app.model(require('./models/login').default);
+app.model(require('./models/users').default);
+app.model(require('./models/devices').default);
 // 4. Router  // require('./router').default
-app.router(RouterConfig);
+app.router(require('./router').default);
 
 // 5. Start
 app.start("#root");

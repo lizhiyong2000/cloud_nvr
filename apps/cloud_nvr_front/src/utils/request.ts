@@ -1,6 +1,6 @@
 import fetch from 'dva/fetch';
 
-function checkStatus(response) {
+function checkStatus(response:any) {
 
     if (response.status >= 200 && response.status < 300) {
         return response;
@@ -18,8 +18,8 @@ function checkStatus(response) {
  * @param  {object} [options] The options we want to pass to "fetch"
  * @return {object}           An object containing either "data" or "err"
  */
-export default async function request(url, options) {
-    console.log("to fetch")
+export default async function request(url:string, options:RequestInit) {
+    console.log("to request:" + url)
     const response = await fetch(url, options);
 
     console.log("fetched")
@@ -28,14 +28,5 @@ export default async function request(url, options) {
 
     const data = await response.json();
 
-    const ret = {
-        data,
-        headers: {},
-    };
-
-    if (response.headers.get('x-total-count')) {
-        ret.headers['x-total-count'] = response.headers.get('x-total-count');
-    }
-
-    return ret;
+    return data;
 }
