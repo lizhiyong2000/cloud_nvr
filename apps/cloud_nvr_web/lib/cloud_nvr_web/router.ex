@@ -14,7 +14,7 @@ defmodule CloudNvrWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
-    plug CloudNvrWeb.Plugs.APIAuthPlug, otp_app: :cloud_nvr
+    plug CloudNvrWeb.Plugs.APIAuthPlug, otp_app: :cloud_nvr_app
   end
 
   pipeline :api_protected do

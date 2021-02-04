@@ -25,4 +25,5 @@ erl_crash.dump
 /apps/cloud_nvr_front/.temp_cache/
 /apps/cloud_nvr_front/dist/
 /apps/cloud_nvr_front/node_modules/
-/apps/cloud_nvr_front/cloud_nvr_front.iml
+*.iml
+.idea

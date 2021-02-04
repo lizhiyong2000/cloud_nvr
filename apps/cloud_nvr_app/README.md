@@ -10,7 +10,7 @@ by adding `cloud_nvr` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:cloud_nvr, "~> 0.1.0"}
+    {:cloud_nvr_app, "~> 0.1.0"}
   ]
 end
 ```
@@ -18,4 +18,3 @@ end
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/cloud_nvr](https://hexdocs.pm/cloud_nvr).
-

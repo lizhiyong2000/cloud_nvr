@@ -5,18 +5,18 @@ import Table from "antd/lib/table";
 import Popconfirm from "antd/lib/popconfirm";
 
 import "antd/dist/antd.less";
-import type { StateType } from '../../models/devices';
+// import type { StateType } from "../../models/devices";
 
 export interface IDevicesProps {
-  onDelete: (values:any)=>void;
-  state: StateType;
-};
+  onDelete: (values: any) => void;
+  devices: any[];
+}
 
 // export interface IDevicesState {
 //   devices?: Array<{title: string, content: string}>;
 // };
 
-const DevicesList = ({ onDelete, state }:IDevicesProps) => {
+const DevicesList = ({ onDelete, devices }: IDevicesProps) => {
   const columns = [
     {
       title: "Name",
@@ -24,7 +24,7 @@ const DevicesList = ({ onDelete, state }:IDevicesProps) => {
     },
     {
       title: "Actions",
-      render: (text:any, record:any) => {
+      render: (text: any, record: any) => {
         return (
           <Popconfirm title="Delete?" onConfirm={() => onDelete(record.id)}>
             <Button>Delete</Button>
@@ -33,12 +33,14 @@ const DevicesList = ({ onDelete, state }:IDevicesProps) => {
       },
     },
   ];
-  return <Table dataSource={state.devices} columns={columns} />;
+
+  console.log(devices);
+  return <Table dataSource={devices} columns={columns} />;
 };
 
 DevicesList.propTypes = {
   onDelete: PropTypes.func.isRequired,
-  state: PropTypes.array.isRequired,
+  devices: PropTypes.array.isRequired,
 };
 
 export default DevicesList;

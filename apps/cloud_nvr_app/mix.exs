@@ -1,9 +1,9 @@
-defmodule CloudNvr.MixProject do
+defmodule CloudNvrApp.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :cloud_nvr,
+      app: :cloud_nvr_app,
       version: "0.1.0",
       build_path: "../../_build",
       config_path: "../../config/config.exs",
