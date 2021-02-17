@@ -12,12 +12,12 @@ import Config
 config :cloud_nvr_web,
   generators: [context_app: false]
   
-config :cloud_nvr, ecto_repos: [CloudNvr.Repo]
+config :cloud_nvr_app, ecto_repos: [CloudNvr.Repo]
 
-config :cloud_nvr, CloudNvr.Repo,
+config :cloud_nvr_app, CloudNvr.Repo,
   database: "cloud_nvr",
   username: "root",
-  password: "123456",
+  password: "",
   hostname: "localhost",
   port: "3306",
   url: "mysql://root@localhost:3306/cloud_nvr"
@@ -28,7 +28,7 @@ config :cloud_nvr_web, :generators,
        context_app: :cloud_nvr
 
 # Configures pow
-config :cloud_nvr, :pow,
+config :cloud_nvr_app, :pow,
        user: CloudNvr.Accounts.User,
        repo: CloudNvr.Repo
        

@@ -49,7 +49,7 @@ defmodule CloudNvrWeb.MixProject do
       {:phoenix_ecto, "~> 4.2"},
       {:plug_static_index_html, "~> 1.0"},
       {:pow, "~> 1.0.22"},
-      {:cloud_nvr, in_umbrella: true}
+      {:cloud_nvr_app, in_umbrella: true}
     ]
   end
 

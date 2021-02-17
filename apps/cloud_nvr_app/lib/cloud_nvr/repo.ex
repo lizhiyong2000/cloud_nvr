@@ -2,7 +2,7 @@ defmodule CloudNvr.Repo do
     @moduledoc false
 
     use Ecto.Repo,
-        otp_app: :cloud_nvr,
+        otp_app: :cloud_nvr_app,
         adapter: Ecto.Adapters.MyXQL
     use Scrivener, page_size: 10
     use Ecto.SoftDelete.Repo

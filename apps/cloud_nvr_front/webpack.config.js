@@ -8,7 +8,9 @@ const RobotstxtPlugin = require("robotstxt-webpack-plugin");
 
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
-
+// const TerserPlugin = require("terser-webpack-plugin");
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+//
 // const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 // const smp = new SpeedMeasurePlugin();
 
@@ -20,6 +22,11 @@ const themeVariables = lessToJs(
   fs.readFileSync(path.join(__dirname, "./src/ant-theme-vars.less"), "utf8")
 );
 
+var env = process.env.MIX_ENV || "dev";
+var prod = env === "prod";
+
+console.log(env);
+
 const devMode = process.env.NODE_ENV === "development";
 
 function join(dest) {
@@ -28,30 +35,75 @@ function join(dest) {
 
 const config = {
   optimization: {
-    minimizer: [new OptimizeCSSAssetsPlugin({})],
+    // minimize: true,
+    minimizer: [
+      // new TerserPlugin(),
+      new OptimizeCSSAssetsPlugin({}),
+    ],
   },
-  mode: devMode ? "development" : "production",
+  // mode: devMode ? "development" : "production",
+  mode: "production",
+  cache: {
+    type: "filesystem",
+    cacheDirectory: path.resolve(__dirname, ".temp_cache"),
+  },
   entry: {
-    app: "./src/index.js",
+    app: "./src/index.tsx",
   },
   output: {
     path: join("../cloud_nvr_web/priv/static/assets"),
     filename: "[name].js",
     publicPath: "/assets/",
   },
+  resolve: {
+    extensions: [".js", ".jsx", ".json", ".ts", ".tsx", "css", "less"],
+  },
   module: {
     rules: [
+      {
+        test: /\.(ts|tsx)$/,
+        loader: "ts-loader",
+      },
       {
         test: /\.js$/,
         loader: "babel-loader",
         exclude: /node_modules/,
         options: {
-          plugins: [["import", { libraryName: "antd", style: true }]],
+          cacheDirectory: true,
+          plugins: [
+            [
+              "import",
+              {
+                libraryName: "antd",
+                // libraryDirectory: "es",
+                style: true,
+              },
+            ],
+            // [
+            //   "import",
+            //   {
+            //     libraryName: "@ant-design/icons",
+            //     libraryDirectory: "es/icons",
+            //     camel2DashComponentName: false,
+            //   },
+            //   "@ant-design/icons",
+            // ],
+          ],
         },
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        use: [
+          MiniCssExtractPlugin.loader,
+          { loader: "style-loader" },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+            },
+          },
+          "sass-loader"
+        ],
         exclude: /node_modules/,
       },
       {
@@ -82,7 +134,9 @@ const config = {
   },
   plugins: [
     // new CleanWebpackPlugin(),
+    // new BundleAnalyzerPlugin(),
     new HtmlWebpackPlugin({
+      // favicon: "./public/favicon.ico",
       template: "./public/index.html",
       filename: "../index.html",
       minify: {
@@ -99,22 +153,22 @@ const config = {
     }),
     new MiniCssExtractPlugin({ filename: "app.css" }),
     new RobotstxtPlugin({ filePath: "../robots.txt" }),
-    new WebpackManifestPlugin({
-      fileName: "asset-manifest.json",
-      publicPath: "/",
-      basePath: "public/",
-      writeToFileEmit: true,
-      generate: (seed, files) => {
-        const manifestFiles = files.reduce(function (manifest, file) {
-          manifest[file.name] = file.path;
-          return manifest;
-        }, seed);
-
-        return {
-          files: manifestFiles,
-        };
-      },
-    }),
+    // new WebpackManifestPlugin({
+    //   fileName: "asset-manifest.json",
+    //   publicPath: "/",
+    //   basePath: "public/",
+    //   writeToFileEmit: true,
+    //   generate: (seed, files) => {
+    //     const manifestFiles = files.reduce(function (manifest, file) {
+    //       manifest[file.name] = file.path;
+    //       return manifest;
+    //     }, seed);
+    //
+    //     return {
+    //       files: manifestFiles,
+    //     };
+    //   },
+    // }),
   ].concat(devMode ? [new HardSourceWebpackPlugin()] : []),
 
   watchOptions: {
