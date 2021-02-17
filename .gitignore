@@ -23,8 +23,10 @@ erl_crash.dump
 # Temporary files for e.g. tests
 /tmp
 /apps/cloud_nvr_front/dist/
+/apps/cloud_nvr_front/.temp_cache/
 /apps/cloud_nvr_front/node_modules/
 /apps/cloud_nvr_front/cloud_nvr_front.iml
 *.lock
 *.iml
 .idea
+
