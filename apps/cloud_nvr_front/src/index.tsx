@@ -1,3 +1,5 @@
+/* eslint @typescript-eslint/no-var-requires: "off" */
+
 import dva from "dva";
 // import createhistory from "history/createBrowserHistory";
 

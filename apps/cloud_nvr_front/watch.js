@@ -1,3 +1,5 @@
+/* eslint @typescript-eslint/no-var-requires: "off" */
+
 const process = require("process");
 const child_process = require("child_process");
 

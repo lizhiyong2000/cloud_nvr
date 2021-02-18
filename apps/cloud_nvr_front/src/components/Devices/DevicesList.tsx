@@ -38,7 +38,10 @@ const DevicesList = ({ onDelete, devices }: IDevicesProps) => {
   return <Table dataSource={devices} columns={columns} />;
 };
 
+DevicesList.displayName = "Hello";
+
 DevicesList.propTypes = {
+  // displayName: 'Hello',
   onDelete: PropTypes.func.isRequired,
   devices: PropTypes.array.isRequired,
 };

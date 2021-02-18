@@ -1,13 +1,15 @@
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+/* eslint @typescript-eslint/no-var-requires: "off" */
+
+// const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
+// const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const RobotstxtPlugin = require("robotstxt-webpack-plugin");
+const RobotsPlugin = require("robotstxt-webpack-plugin");
 
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
+// const HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
 // const TerserPlugin = require("terser-webpack-plugin");
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 //
@@ -22,12 +24,12 @@ const themeVariables = lessToJs(
   fs.readFileSync(path.join(__dirname, "./src/ant-theme-vars.less"), "utf8")
 );
 
-var env = process.env.MIX_ENV || "dev";
-var prod = env === "prod";
+const env = process.env.MIX_ENV || "dev";
+// var prod = env === "prod";
 
 console.log(env);
 
-const devMode = process.env.NODE_ENV === "development";
+// const devMode = process.env.NODE_ENV === "development";
 
 function join(dest) {
   return path.resolve(__dirname, dest);
@@ -97,12 +99,12 @@ const config = {
           MiniCssExtractPlugin.loader,
           { loader: "style-loader" },
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               modules: true,
             },
           },
-          "sass-loader"
+          "sass-loader",
         ],
         exclude: /node_modules/,
       },
@@ -152,7 +154,7 @@ const config = {
       ],
     }),
     new MiniCssExtractPlugin({ filename: "app.css" }),
-    new RobotstxtPlugin({ filePath: "../robots.txt" }),
+    new RobotsPlugin({ filePath: "../robots.txt" }),
     // new WebpackManifestPlugin({
     //   fileName: "asset-manifest.json",
     //   publicPath: "/",
@@ -169,7 +171,8 @@ const config = {
     //     };
     //   },
     // }),
-  ].concat(devMode ? [new HardSourceWebpackPlugin()] : []),
+  ],
+  // .concat(devMode ? [new HardSourceWebpackPlugin()] : []),
 
   watchOptions: {
     poll: 500,
