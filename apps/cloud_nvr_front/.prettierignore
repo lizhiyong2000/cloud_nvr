@@ -1,8 +1,7 @@
-#ignore node_modules
-node_modules
-
-#ignore build folder
-dist
-
-#ignore package-lock.json
-package-lock.json
+**/*.md
+**/*.svg
+**/*.ejs
+**/*.html
+package.json
+.umi
+.umi-production

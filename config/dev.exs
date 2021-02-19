@@ -12,17 +12,23 @@ config :cloud_nvr_web, CloudNvrWeb.Endpoint,
   code_reloader: true,
   check_origin: false,
   watchers: [
+#    node: [
+#      "node_modules/webpack/bin/webpack.js",
+#      "--mode",
+#      "development",
+#      "--config",
+#      "webpack.config.js",
+#      "--watch",
+#      "--watch-options-stdin",
+#      "--progress",
+#      cd: Path.expand("../apps/cloud_nvr_front", __DIR__)
+#    ]
     node: [
-      "node_modules/webpack/bin/webpack.js",
-      "--mode",
-      "development",
-      "--config",
-      "webpack.config.js",
-      "--watch",
-      "--watch-options-stdin",
-      "--progress",
+      "node_modules/.bin/umi",
+      "build",
       cd: Path.expand("../apps/cloud_nvr_front", __DIR__)
     ]
+
 #    node: [
 #      "watch.js",
 #      cd: Path.expand("../apps/cloud_nvr_front", __DIR__)
