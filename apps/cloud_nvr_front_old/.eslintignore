@@ -1,6 +1,0 @@
-#removing node_modules
-node_modules
-
-#removing build folder
-dist
-
