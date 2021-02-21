@@ -21,6 +21,10 @@ defmodule CloudNvrWeb.Router do
     plug Pow.Plug.RequireAuthenticated, error_handler: CloudNvrWeb.Plugs.APIAuthErrorHandler
     plug CloudNvrWeb.Plugs.SetCurrentTenant
   end
+
+  pipeline :front do
+    plug Plug.Static.IndexHtml, at: "/"
+  end
   
 
 #  scope "/", CloudNvrWeb do
@@ -53,6 +57,18 @@ defmodule CloudNvrWeb.Router do
      resources "/users", UserController, except: [:new, :edit]
      resources "/devices", DeviceController, except: [:new, :edit]
    end
+
+#  scope "/front" , CloudNvrWeb do
+#    pipe_through [:front]
+#
+#    match _ do
+#      send_file(conn, 200, "priv/static/index.html")
+#    end
+#  end
+
+
+
+
 
   # Enables LiveDashboard only for development
   #

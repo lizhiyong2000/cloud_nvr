@@ -26,8 +26,7 @@ defmodule CloudNvrWeb.Endpoint do
     from: :cloud_nvr_web,
     gzip: false,
     only: ~w(index.html favicon.ico manifest.json robots.txt assets)
-    
-  
+
 #  plug(
 #    Plug.Static,
 #    at: "/",
