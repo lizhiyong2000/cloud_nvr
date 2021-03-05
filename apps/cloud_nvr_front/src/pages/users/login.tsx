@@ -17,7 +17,7 @@ import leftTop from '../../assets/leftTop.png';
 import rightTop from '../../assets/rightTop.png';
 import leftBottom from '../../assets/leftBottom.png';
 import rightBottom from '../../assets/rightBottom.png';
-import loginLogo from '../../assets/loginLogo.png';
+import logo from '../../assets/logo.svg';
 import {LoginParamsType} from "../../services/users";
 
 const FormItem = Form.Item;
@@ -79,7 +79,7 @@ const Login: FC<PageProps> = (props) => {
         </div>
         <div className={styles.logoContainer}>
           <div className={styles.logo}>
-            <img src={loginLogo} alt=""/>
+            <img src={logo} alt=""/>
           </div>
           <span className={styles.productName}>
               智能视频分析平台
