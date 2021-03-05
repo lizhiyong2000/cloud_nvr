@@ -2,46 +2,25 @@
 
 import { defineConfig } from 'umi';
 
+import routes from './routes';
+
 export default defineConfig({
+
+  // layout :{
+  //   name: '测试',
+  //   locale: true
+  // },
 
   antd:{},
 
   outputPath: '../cloud_nvr_web/priv/static/assets',
-  base: 'front',
+  base: '/',
   publicPath: '/assets/',
 
   nodeModulesTransform: {
     type: 'none',
   },
-  routes: [
-    {
-      path: '/',
-      component: '../layouts/index',
-      routes: [
-        {
-          path: '/devices/index',
-          component: './devices/index',
-        },
-        {
-          path: '/',
-          component: '../pages/index',
-        },
-        {
-          path: '/login',
-          component: '../pages/users/login',
-        },
-        {
-          path: '/users/',
-          component: '../pages/users/list',
-        },
-        {
-          path: '/users/:id',
-          component: '../pages/users/[id]',
-        },
-
-      ],
-    },
-  ],
+  routes,
   fastRefresh: {},
   locale: {
     default: 'zh-CN',

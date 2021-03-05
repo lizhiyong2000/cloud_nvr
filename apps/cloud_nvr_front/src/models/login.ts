@@ -1,79 +1,90 @@
-import { routerRedux } from "dva/router";
-import * as usersService from "../services/users";
-import {Effect, Model, Subscription} from "dva";
-import {Reducer} from "redux";
+import { stringify } from 'querystring';
+import type { Reducer, Effect } from 'umi';
+import { history } from 'umi';
 
-export interface LoginModelState {
-  loginLoading: boolean;
-  isLogin: boolean | undefined;
+import { fakeAccountLogin } from '@/services/login';
+import { setAuthority } from '@/utils/authority';
+import { getPageQuery } from '@/utils/utils';
+import { message } from 'antd';
+
+export type StateType = {
+  status?: 'ok' | 'error';
+  type?: string;
+  currentAuthority?: 'user' | 'guest' | 'admin';
 };
 
-export interface LoginModelType {
-  namespace: 'login';
-  state: LoginModelState;
+export type LoginModelType = {
+  namespace: string;
+  state: StateType;
   effects: {
     login: Effect;
+    logout: Effect;
   };
   reducers: {
-    showLoginLoading: Reducer<LoginModelState>;
-    hideLoginLoading: Reducer<LoginModelState>;
-    login_result: Reducer<LoginModelState>;
+    changeLoginStatus: Reducer<StateType>;
   };
+};
 
-}
+const Model: LoginModelType = {
+  namespace: 'login',
 
-
-const LoginModel: LoginModelType = {
-  namespace: "login",
   state: {
-    loginLoading: false,
-    isLogin: false,
+    status: undefined,
   },
-  // subscriptions: {
-  //     setup ({ dispatch }) {
-  //     },
-  // },
+
   effects: {
     *login({ payload }, { call, put }) {
-      console.log("payload", payload);
-      yield put({ type: "showLoginLoading" });
-      // yield call(delay,2000)
-      // yield put({ type: 'hideLoginLoading' })
+      const response = yield call(fakeAccountLogin, payload);
+      yield put({
+        type: 'changeLoginStatus',
+        payload: response,
+      });
+      // Login successfully
+      if (response.status === 'ok') {
+        const urlParams = new URL(window.location.href);
+        const params = getPageQuery();
+        message.success('🎉 🎉 🎉  登录成功！');
+        let { redirect } = params as { redirect: string };
+        if (redirect) {
+          const redirectUrlParams = new URL(redirect);
+          if (redirectUrlParams.origin === urlParams.origin) {
+            redirect = redirect.substr(urlParams.origin.length);
+            if (redirect.match(/^\/.*#/)) {
+              redirect = redirect.substr(redirect.indexOf('#') + 1);
+            }
+          } else {
+            window.location.href = '/';
+            return;
+          }
+        }
+        history.replace(redirect || '/');
+      }
+    },
 
-      const data = yield call(usersService.login, { payload });
-      yield put({ type: "hideLoginLoading" });
-      yield put({ type: "login_result", payload: data });
-
-      // yield call(delay,1000)
-      yield put(routerRedux.push("/users"));
+    logout() {
+      const { redirect } = getPageQuery();
+      // Note: There may be security issues, please note
+      if (window.location.pathname !== '/user/login' && !redirect) {
+        history.replace({
+          pathname: '/user/login',
+          search: stringify({
+            redirect: window.location.href,
+          }),
+        });
+      }
     },
   },
-  reducers: {
-    showLoginLoading(state) {
-      return {
-        isLogin: state?.isLogin,
-        loginLoading: true,
-      };
-    },
-    hideLoginLoading(state) {
-      return {
-        isLogin: state?.isLogin,
-        loginLoading: false,
-      };
-    },
-    login_result(state, { payload }) {
-      console.log("login_result:");
-      console.log(state);
-      console.log(payload);
-      const token = payload.data.access_token;
 
-      // localStorage.setItem("token", payload.data.token);
+  reducers: {
+    changeLoginStatus(state, { payload }) {
+      setAuthority(payload.currentAuthority);
       return {
-        loginLoading: false,
-        isLogin: true,
+        ...state,
+        status: payload.status,
+        type: payload.type,
       };
     },
   },
 };
 
-export default LoginModel;
+export default Model;
