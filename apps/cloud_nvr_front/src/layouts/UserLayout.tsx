@@ -45,7 +45,7 @@ const UserLayout: React.FC<UserLayoutProps> = (props) => {
     //     <div className={styles.lang}>
     //       <SelectLang />
     //     </div>
-        <div>
+        <div style={{height: "100%"}}>
           {children}
         </div>
     //     <DefaultFooter />
