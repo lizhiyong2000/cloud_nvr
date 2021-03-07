@@ -5,3 +5,4 @@ use Mix.Config
 config :cloud_nvr_web, CloudNvrWeb.Endpoint,
   http: [port: 4002],
   server: false
+

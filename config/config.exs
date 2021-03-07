@@ -17,7 +17,7 @@ config :cloud_nvr_app, ecto_repos: [CloudNvr.Repo]
 config :cloud_nvr_app, CloudNvr.Repo,
   database: "cloud_nvr",
   username: "root",
-  password: "",
+  password: "123456",
   hostname: "localhost",
   port: "3306",
   url: "mysql://root@localhost:3306/cloud_nvr"
@@ -32,7 +32,7 @@ config :cloud_nvr_app, :pow,
        user: CloudNvr.Accounts.User,
        repo: CloudNvr.Repo
        
-config :triplex, repo: CloudNvr.Repo
+#config :triplex, repo: CloudNvr.Repo
 
 # Configures the endpoint
 config :cloud_nvr_web, CloudNvrWeb.Endpoint,
